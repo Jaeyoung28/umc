@@ -2,6 +2,7 @@ package umc.spring.apiPayload.code.status;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.hibernate.validator.internal.metadata.aggregated.AbstractConstraintMetaData;
 import org.springframework.http.HttpStatus;
 import umc.spring.apiPayload.code.BaseErrorCode;
 import umc.spring.apiPayload.code.ErrorReasonDTO;
@@ -36,7 +37,10 @@ public enum ErrorStatus implements BaseErrorCode {
 
     // Mission Error
     MISSION_NOT_FOUND(HttpStatus.NOT_FOUND, "MISSION4001", "존재하지 않는 미션입니다."),
-    MISSION_ALREADY_CHALLENGING(HttpStatus.BAD_REQUEST, "MISSION4002", "이미 도전 중인 미션입니다.");
+    MISSION_ALREADY_CHALLENGING(HttpStatus.BAD_REQUEST, "MISSION4002", "이미 도전 중인 미션입니다."),
+
+    // Page Error
+    PAGE_LESS_ZERO(HttpStatus.BAD_REQUEST, "PAGE4001", "page는 1부터 입력해야 합니다.");
 
 
     private final HttpStatus httpStatus;

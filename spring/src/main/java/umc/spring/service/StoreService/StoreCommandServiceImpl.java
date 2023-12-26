@@ -42,6 +42,7 @@ public class StoreCommandServiceImpl implements StoreCommandService{
         return reviewRepository.save(review);
     }
 
+    /*
     @Override
     public MemberMission challengMission(Long missionId, Long memberId, StoreRequestDTO.MissionDTO request){
         MemberMission memberMission = StoreConverter.toMemberMission(request);
@@ -51,4 +52,7 @@ public class StoreCommandServiceImpl implements StoreCommandService{
 
         return memberMissionRepository.save(memberMission);
     }
+    */
+
+
 }
