@@ -1,6 +1,9 @@
 package umc.spring.domain;
 
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import umc.spring.domain.base.BaseEntity;
 
 import javax.persistence.*;
@@ -10,6 +13,8 @@ import java.util.List;
 @Entity
 @Getter
 @Builder
+@DynamicUpdate
+@DynamicInsert
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Store extends BaseEntity {
@@ -24,6 +29,7 @@ public class Store extends BaseEntity {
     @Column(nullable = false, length = 50)
     private String address;
 
+    @ColumnDefault("0.0")
     private Float score;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -35,4 +41,12 @@ public class Store extends BaseEntity {
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     private List<Review> reviewList = new ArrayList<>();
+
+    public void setRegion(Region region){
+        if(this.region != null)
+            region.getStoreList().remove(this);
+        this.region = region;
+        region.getStoreList().add(this);
+    }
+
 }
